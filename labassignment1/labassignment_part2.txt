@@ -1,0 +1,42 @@
+/*
+Anisha Aggarwal
+LabAssignment1
+*/
+
+Distortion Description:
+	I decided to invert the colors of a pnm image. I felt like this filter provided a very visible difference in what the image looked like at first glance and had the ability to be parallelized.
+
+Commands run:
+Anishas-MacBook-Air-2:labassignment1 anishaa$ make
+g++ -g -I. -c filters_p.C
+g++ main.o image.o sink.o source.o PNMreader.o PNMwriter.o filters_p.o filters_ph.o -o parallel_invert
+Anishas-MacBook-Air-2:labassignment1 anishaa$ ./serial_invert duckie.pnm serial.pnm
+@time of serial run:			[80.740] million cycles
+printf: 1.84467e+13
+Anishas-MacBook-Air-2:labassignment1 anishaa$ ./serial_invert duckie.pnm serial.pnm
+@time of serial run:			[71.413] million cycles
+printf: 1.84467e+13
+Anishas-MacBook-Air-2:labassignment1 anishaa$ ./serial_invert duckie.pnm serial.pnm
+@time of serial run:			[78.683] million cycles
+printf: 1.84467e+13
+Anishas-MacBook-Air-2:labassignment1 anishaa$ ./parallel_invert duckie.pnm parallel.pnm
+@time of serial run:			[9.821] million cycles
+printf: 1.84467e+13
+Anishas-MacBook-Air-2:labassignment1 anishaa$ ./parallel_invert duckie.pnm parallel.pnm
+@time of serial run:			[8.730] million cycles
+printf: 1.84467e+13
+Anishas-MacBook-Air-2:labassignment1 anishaa$ ./parallel_invert duckie.pnm parallel.pnm
+@time of serial run:			[8.210] million cycles
+printf: 1.84467e+13
+
+
+Observations:
+	After running the both serial and parallel inversions 3 times each, I noticed that the number of cycles were not always the same. 
+
+Comparison:
+	The outcome files are the exact same which is what I was expecting.
+	The number of cycles for the inversion using parallel programming was 9x faster than the serial programming.
+
+Justification:
+	The reason the parallel inversion was consistently about 9x faster was because it was SIMD. Whereas serial inversion is SISD.
+

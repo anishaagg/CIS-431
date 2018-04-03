@@ -1,0 +1,15 @@
+SRC=main.C image.C sink.C source.C PNMreader.C PNMwriter.C filters_p.C
+OBJ=$(SRC:.C=.o)
+CPPFLAGS_1=-std=c++11 -Wall -Wextra -Wfatal-errors -m64 -DSTEP_3
+
+default: invert_3
+
+invert_3: $(OBJ)
+	g++ $(OBJ) -ltbb -o invert_3 
+
+.C.o: $<
+	g++ -g -I. $(CPPFLAGS_1) -c $<
+
+
+clean:
+	rm *.o 
